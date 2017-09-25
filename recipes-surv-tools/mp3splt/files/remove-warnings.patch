@@ -1,0 +1,30 @@
+Index: libmp3splt/m4/mad.m4
+===================================================================
+--- libmp3splt.orig/m4/mad.m4
++++ libmp3splt/m4/mad.m4
+@@ -17,25 +17,6 @@ AC_ARG_ENABLE(madtest, [AC_HELP_STRING([
+     [ Do not try to compile and run a test mad program. ]) ],
+   , enable_madtest=yes)
+ 
+-if test "x$mad_libraries" != "x"; then
+-  MAD_LIBS="-L$mad_libraries"
+-elif test "x$mad_prefix" != "x"; then
+-  MAD_LIBS="-L$mad_prefix/lib"
+-elif test "x$prefix" != "xNONE"; then
+-  MAD_LIBS="-L$prefix/lib"
+-fi
+-
+-MAD_LIBS="$MAD_LIBS -lmad"
+-
+-if test "x$mad_includes" != "x"; then
+-  MAD_CFLAGS="-I$mad_includes"
+-elif test "x$mad_prefix" != "x"; then
+-  MAD_CFLAGS="-I$mad_prefix/include"
+-elif test "x$prefix" != "xNONE"; then
+-  MAD_CFLAGS="-I$prefix/include"
+-fi
+-
+-
+ AC_MSG_CHECKING(for Mad)
+ no_mad=""
+ 
