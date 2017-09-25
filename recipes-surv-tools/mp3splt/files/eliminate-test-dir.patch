@@ -1,0 +1,12 @@
+Index: libmp3splt/Makefile.am
+===================================================================
+--- libmp3splt.orig/Makefile.am
++++ libmp3splt/Makefile.am
+@@ -1,6 +1,6 @@
+ ACLOCAL_AMFLAGS = -I m4
+ 
+-SUBDIRS = src plugins test m4 po doc
++SUBDIRS = src plugins m4 po doc
+ 
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libmp3splt.pc

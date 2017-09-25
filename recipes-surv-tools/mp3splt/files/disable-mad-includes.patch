@@ -1,0 +1,20 @@
+Index: libmp3splt/m4/mad.m4
+===================================================================
+--- libmp3splt.orig/m4/mad.m4
++++ libmp3splt/m4/mad.m4
+@@ -27,15 +27,6 @@ fi
+ 
+ MAD_LIBS="$MAD_LIBS -lmad"
+ 
+-if test "x$mad_includes" != "x"; then
+-  MAD_CFLAGS="-I$mad_includes"
+-elif test "x$mad_prefix" != "x"; then
+-  MAD_CFLAGS="-I$mad_prefix/include"
+-elif test "x$prefix" != "xNONE"; then
+-  MAD_CFLAGS="-I$prefix/include"
+-fi
+-
+-
+ AC_MSG_CHECKING(for Mad)
+ no_mad=""
+ 

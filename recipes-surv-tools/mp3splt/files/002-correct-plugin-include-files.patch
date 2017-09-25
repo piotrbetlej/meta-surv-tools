@@ -1,0 +1,53 @@
+Index: libmp3splt/plugins/Makefile.am
+===================================================================
+--- libmp3splt.orig/plugins/Makefile.am
++++ libmp3splt/plugins/Makefile.am
+@@ -3,7 +3,7 @@ plugindir=$(libdir)/libmp3splt$(SONAME)
+ plugin_LTLIBRARIES = 
+ 
+ #ccommon_LDFLAGS = -module -export-dynamic -avoid-version
+-common_CPPFLAGS = -I$(top_srcdir)/include/libmp3splt -I$(top_srcdir)/src
++common_CPPFLAGS = -I$(top_srcdir)/include/libmp3splt -I$(top_srcdir)/src -I$(top_srcdir)/plugins
+ common_LDFLAGS = -L$(top_builddir)/src -L$(top_builddir)/src/.libs \
+    -no-undefined -lm -lmp3splt @LIBINTL@
+ 
+@@ -15,8 +15,8 @@ endif
+ if MP3_PLUGIN
+ 
+ plugin_LTLIBRARIES += libsplt_mp3.la
+-libsplt_mp3_la_SOURCES = mp3.c mp3.h mp3_silence.c mp3_silence.h mp3_utils.c mp3_utils.h \
+-silence_processors.c silence_processors.h
++libsplt_mp3_la_SOURCES = mp3.c mp3_silence.c mp3_utils.c \
++silence_processors.c
+ 
+ libsplt_mp3_la_CPPFLAGS = $(common_CPPFLAGS) @MAD_CFLAGS@
+ libsplt_mp3_la_LDFLAGS = $(common_LDFLAGS) @MAD_LIBS@
+@@ -34,8 +34,8 @@ endif
+ if OGG_PLUGIN
+ 
+ plugin_LTLIBRARIES += libsplt_ogg.la
+-libsplt_ogg_la_SOURCES = ogg.c ogg.h ogg_silence.c ogg_silence.h ogg_utils.c ogg_utils.h \
+-silence_processors.c silence_processors.h ogg_new_stream_handler.c ogg_new_stream_handler.h
++libsplt_ogg_la_SOURCES = ogg.c ogg_silence.c ogg_utils.c\
++silence_processors.c ogg_new_stream_handler.c
+ 
+ libsplt_ogg_la_CPPFLAGS = $(common_CPPFLAGS) @OGG_CFLAGS@ @VORBIS_CFLAGS@
+ libsplt_ogg_la_LDFLAGS = $(common_LDFLAGS) @VORBISFILE_LIBS@ @VORBIS_LIBS@ @OGG_LIBS@ 
+@@ -46,13 +46,12 @@ endif
+ if FLAC_PLUGIN
+ 
+ plugin_LTLIBRARIES += libsplt_flac.la
+-libsplt_flac_la_SOURCES = flac_frame_reader.c flac_frame_reader.h flac_utils.c flac_utils.h \
+-from_flac_library.c from_flac_library.h flac.c flac.h flac_metadata_utils.c flac_metadata_utils.h \
+-flac_metadata.c flac_metadata.h flac_tags.c flac_tags.h flac_silence.c flac_silence.h \
+-silence_processors.c silence_processors.h md5.c md5.h flac_md5_decoder.c flac_md5_decoder.h
++libsplt_flac_la_SOURCES = flac_frame_reader.c flac_utils.c \
++from_flac_library.c flac.c flac_metadata_utils.c \
++flac_metadata.c flac_tags.c flac_silence.c \
++silence_processors.c md5.c flac_md5_decoder.c
+ 
+ libsplt_flac_la_CPPFLAGS = $(common_CPPFLAGS) @FLAC_CFLAGS@
+ libsplt_flac_la_LDFLAGS = $(common_LDFLAGS) @FLAC_LIBS@
+ 
+ endif
+-
