@@ -20,6 +20,10 @@ file://remove-warnings.patch \
 DEPENDS = "gettext gettext-native libtool libpcre libmad"
 RDEPENDS_${PN} = "gettext libpcre libmad"
 
+FILES_${PN} += "${nonarch_libdir}/pkgconfig ${libdir}/libsplt_mp3.l*"
+
+PACKAGES="${PN} ${PN}-dbg ${PN}-staticdev ${PN}-dev ${PN}-doc ${PN}-locale"
+
 inherit autotools pkgconfig gettext
 
 # SVNDIR = "${WORKDIR}/build"
@@ -35,13 +39,19 @@ do_configure_prepend() {
 }
 
 do_install () {
-	mkdir -p ${D}/${libdir}
-	install ${B}/src/.libs/libmp3splt.so.0.0.9 ${D}/${libdir}
-	cp -a ${B}/src/.libs/libmp3splt.so.0 ${D}/${libdir}
-	cp -a ${B}/src/.libs/libmp3splt.so ${D}/${libdir}
+	mkdir -p ${D}${libdir}
+	install ${B}/src/.libs/libmp3splt.so.0.0.9 ${D}${libdir}
+	cp -a ${B}/src/.libs/libmp3splt.so.0 ${D}${libdir}
+	cp -a ${B}/src/.libs/libmp3splt.so ${D}${libdir}
 
-	install ${B}/plugins/.libs/libsplt_mp3.so.0.0.0 ${D}/${libdir}
-	cp -a ${B}/plugins/.libs/libsplt_mp3.so.0 ${D}/${libdir}
-	cp -a ${B}/plugins/.libs/libsplt_mp3.so ${D}/${libdir}
+	install ${B}/plugins/.libs/libsplt_mp3.so.0.0.0 ${D}${libdir}
+	cp -a ${B}/plugins/.libs/libsplt_mp3.so.0 ${D}${libdir}
+	cp -a ${B}/plugins/.libs/libsplt_mp3.so ${D}${libdir}
+	cp -a ${B}/plugins/.libs/libsplt_mp3.l* ${D}${libdir}
+	
+	mkdir -p ${D}${nonarch_libdir}/pkgconfig
+	install ${B}/libmp3splt.pc ${D}${nonarch_libdir}/pkgconfig
 
+	mkdir -p ${D}${prefix}/include/libmp3splt
+	install ${B}/include/libmp3splt/* ${D}/${prefix}/include/libmp3splt/
 }
